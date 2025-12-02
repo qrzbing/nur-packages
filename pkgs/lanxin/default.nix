@@ -164,6 +164,8 @@ stdenv.mkDerivation {
           mv "$out/share/icons/hicolor/scalable/apps/cn.lanxin1.svg" "$out/share/icons/hicolor/scalable/apps/lanxin1.svg"
        fi
     fi
+
+    runHook postInstall
   '';
 
   desktopItems = [
