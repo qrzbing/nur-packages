@@ -31,6 +31,8 @@
   nss,
   nspr,
   xorg,
+  mtdev,
+  libinput,
 }:
 
 let
@@ -123,6 +125,9 @@ stdenv.mkDerivation {
 
     libtiff5-deb
     libjasper-deb
+
+    mtdev
+    libinput
   ];
 
   nativeBuildInputs = [
