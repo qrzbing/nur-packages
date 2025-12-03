@@ -17,5 +17,6 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
+  feishin-bin = pkgs.callPackage ./pkgs/feishin { };
   # ...
 }
