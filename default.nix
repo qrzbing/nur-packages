@@ -16,6 +16,7 @@
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  debootstrap = pkgs.callPackage ./pkgs/debootstrap { };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   feishin-bin = pkgs.callPackage ./pkgs/feishin-bin { };
   # ...
