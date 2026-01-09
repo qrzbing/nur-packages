@@ -30,11 +30,11 @@
 
 stdenv.mkDerivation rec {
   pname = "feishin";
-  version = "0.22.0";
+  version = "1.2.0";
 
   src = fetchurl {
     url = "https://github.com/jeffvli/feishin/releases/download/v${version}/Feishin-linux-x64.tar.xz";
-    hash = "sha256-exKZjBHNSjPWyhfHj8aCrPTmnqHIXolPoW5WeskedsI=";
+    hash = "sha256-/DGRQTZ/jdneGPiOyP/9jHGA66Xz+Ca2FP0ZeDyR0lY=";
   };
 
   nativeBuildInputs = [
