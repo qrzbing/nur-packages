@@ -19,5 +19,6 @@
   debootstrap = pkgs.callPackage ./pkgs/debootstrap { };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   feishin-bin = pkgs.callPackage ./pkgs/feishin-bin { };
+  opencode = pkgs.callPackage ./pkgs/opencode { };
   # ...
 }
