@@ -58,6 +58,7 @@ let
       fee1-dead
       prince213
       ryan4yin
+      qrzbing
     ];
   };
 in

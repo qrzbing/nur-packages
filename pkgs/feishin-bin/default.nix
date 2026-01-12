@@ -113,6 +113,6 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     license = licenses.gpl3Plus;
     mainProgram = "feishin";
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [ qrzbing ];
   };
 }

@@ -215,5 +215,6 @@ stdenv.mkDerivation {
     license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
     mainProgram = "lanxin";
+    maintainers = with maintainers; [ qrzbing ];
   };
 }

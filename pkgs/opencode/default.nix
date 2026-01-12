@@ -237,7 +237,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     '';
     homepage = "https://github.com/anomalyco/opencode";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ delafthi ];
+    maintainers = with lib.maintainers; [
+      delafthi
+      qrzbing
+    ];
     sourceProvenance = with lib.sourceTypes; [ fromSource ];
     platforms = [
       "aarch64-linux"

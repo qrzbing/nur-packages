@@ -101,7 +101,10 @@ stdenv.mkDerivation rec {
     description = "Tool to create a Debian system in a chroot";
     homepage = "https://wiki.debian.org/Debootstrap";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ marcweber ];
+    maintainers = with lib.maintainers; [
+      marcweber
+      qrzbing
+    ];
     platforms = lib.platforms.linux;
     mainProgram = "debootstrap";
   };
