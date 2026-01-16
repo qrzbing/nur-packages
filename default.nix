@@ -17,7 +17,6 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   debootstrap = pkgs.callPackage ./pkgs/debootstrap { };
-  feishin-bin = pkgs.callPackage ./pkgs/feishin-bin { };
   gdb-static = pkgs.callPackage ./pkgs/gdb-static { };
   gef-static = pkgs.callPackage ./pkgs/gef-static {
     inherit gdb-static;
