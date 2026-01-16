@@ -10,7 +10,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-{
+rec {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
@@ -19,6 +19,9 @@
   debootstrap = pkgs.callPackage ./pkgs/debootstrap { };
   feishin-bin = pkgs.callPackage ./pkgs/feishin-bin { };
   gdb-static = pkgs.callPackage ./pkgs/gdb-static { };
+  gef-static = pkgs.callPackage ./pkgs/gef-static {
+    inherit gdb-static;
+  };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   opencode = pkgs.callPackage ./pkgs/opencode { };
   qq = pkgs.callPackage ./pkgs/qq { };
