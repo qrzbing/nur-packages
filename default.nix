@@ -22,7 +22,6 @@ rec {
     inherit gdb-static;
   };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
-  opencode = pkgs.callPackage ./pkgs/opencode { };
   qq = pkgs.callPackage ./pkgs/qq { };
   # ...
 }
