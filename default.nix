@@ -21,6 +21,9 @@ rec {
   gef-static = pkgs.callPackage ./pkgs/gef-static {
     inherit gdb-static;
   };
+  gef-static-git = pkgs.callPackage ./pkgs/gef-static-git {
+    inherit gdb-static;
+  };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   # ...
 }
