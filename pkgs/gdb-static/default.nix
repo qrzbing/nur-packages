@@ -60,7 +60,17 @@ stdenv.mkDerivation rec {
         ''
       else
         ''
-          cp -r * $out/bin/
+          cp addr2line ar as \
+             c++filt elfedit \
+             embedspu \
+             gcore \
+             gdb gdb-add-index gdbserver \
+             gprof gstack \
+             ld ld.bfd nm \
+             objcopy objdump \
+             ranlib readelf size \
+             strings strip \
+            $out/bin/
           chmod +x $out/bin/*
         ''
     }
