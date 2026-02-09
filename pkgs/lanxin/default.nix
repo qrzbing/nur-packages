@@ -30,7 +30,25 @@
   pango,
   nss,
   nspr,
-  xorg,
+  libX11,
+  libXtst,
+  libxshmfence,
+  libXScrnSaver,
+  libXcomposite,
+  libXcursor,
+  libXdamage,
+  libXext,
+  libXfixes,
+  libXi,
+  libXrandr,
+  libXrender,
+  libxkbfile,
+  libxcb,
+  xcbutil,
+  xcbutilwm,
+  xcbutilimage,
+  xcbutilkeysyms,
+  xcbutilrenderutil,
   mtdev,
   libinput,
 }:
@@ -99,25 +117,25 @@ stdenv.mkDerivation {
     pango
     nss
     nspr
-    xorg.libX11
-    xorg.libXtst
-    xorg.libxshmfence
-    xorg.libXScrnSaver
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libxkbfile
-    xorg.libxcb
-    xorg.xcbutil
-    xorg.xcbutilwm
-    xorg.xcbutilimage
-    xorg.xcbutilkeysyms
-    xorg.xcbutilrenderutil
+    libX11
+    libXtst
+    libxshmfence
+    libXScrnSaver
+    libXcomposite
+    libXcursor
+    libXdamage
+    libXext
+    libXfixes
+    libXi
+    libXrandr
+    libXrender
+    libxkbfile
+    libxcb
+    xcbutil
+    xcbutilwm
+    xcbutilimage
+    xcbutilkeysyms
+    xcbutilrenderutil
     qt5.qtbase
     qt5.qtdeclarative
     qt5.qtwayland
