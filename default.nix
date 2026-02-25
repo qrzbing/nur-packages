@@ -25,6 +25,5 @@ rec {
     inherit gdb-static;
   };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
-  picgo-electron = pkgs.callPackage ./pkgs/picgo-electron { };
   # ...
 }
