@@ -51,13 +51,17 @@
   xcbutilrenderutil,
   mtdev,
   libinput,
+  gst_all_1,
+  dbus-glib,
+  faad2,
+  openal,
 }:
 
 let
-  version = "9.1.1.110191_10191";
+  version = "9.4.2.111636_11636";
   src = fetchurl {
     url = "https://package.lanxin.cn/client/linux/lanxin-x64_Official_${version}.deb";
-    sha256 = "sha256-ny2sfeo3/l4178vkfIYW75GOcaOhhhjnuRhCsiAURMA=";
+    sha256 = "sha256-ktU9LsUcf2e7KIfzjNurMj7T3TqH4dUYzDbLw9DvkKc=";
   };
 
   # For old libs
@@ -136,16 +140,24 @@ stdenv.mkDerivation {
     xcbutilimage
     xcbutilkeysyms
     xcbutilrenderutil
+    qt5.qtmultimedia
     qt5.qtbase
     qt5.qtdeclarative
     qt5.qtwayland
     qt5.qtwebsockets
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-bad
 
     libtiff5-deb
     libjasper-deb
 
     mtdev
     libinput
+
+    dbus-glib
+    faad2
+    openal
   ];
 
   nativeBuildInputs = [
