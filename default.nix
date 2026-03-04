@@ -16,7 +16,6 @@ rec {
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  debootstrap = pkgs.callPackage ./pkgs/debootstrap { };
   gdb-static = pkgs.callPackage ./pkgs/gdb-static { };
   gef-static = pkgs.callPackage ./pkgs/gef-static {
     inherit gdb-static;
