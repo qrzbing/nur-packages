@@ -6,11 +6,11 @@
 
 stdenv.mkDerivation rec {
   pname = "neo4j-mcp";
-  version = "1.4.5";
+  version = "1.5.0";
 
   src = fetchurl {
     url = "https://github.com/neo4j/mcp/releases/download/v${version}/neo4j-mcp_Linux_x86_64.tar.gz";
-    sha256 = "sha256-l8XZ6S7M9xkGqxnhDsgQksavZExtnZjR8O+qe6LKlMg=";
+    sha256 = "sha256-fPxPpASRIlAz+3XJtAUHzKrLidkxDnf0PTfgh+P5yoc=";
   };
 
   # Upstream tarball does not contain a single top-level directory.
