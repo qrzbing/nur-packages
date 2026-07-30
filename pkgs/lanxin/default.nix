@@ -5,24 +5,20 @@
   dpkg,
   autoPatchelfHook,
   makeWrapper,
-  qt5, # wrapQtAppsHook
-  copyDesktopItems, # Install desktopItems
-  makeDesktopItem, # Genirate .desktop file
-  glibc,
+  qt5,
+  copyDesktopItems,
+  makeDesktopItem,
   zlib,
   dbus,
   cups,
-  at-spi2-atk,
   at-spi2-core,
   libkrb5,
-  libtiff,
   libdrm,
   alsa-lib,
   libpulseaudio,
   systemd,
   libglvnd,
   mesa,
-  vulkan-loader,
   gtk2,
   gtk3,
   gdk-pixbuf,
@@ -35,20 +31,11 @@
   libxshmfence,
   libXScrnSaver,
   libXcomposite,
-  libXcursor,
   libXdamage,
   libXext,
   libXfixes,
-  libXi,
   libXrandr,
-  libXrender,
-  libxkbfile,
   libxcb,
-  xcbutil,
-  xcbutilwm,
-  xcbutilimage,
-  xcbutilkeysyms,
-  xcbutilrenderutil,
   mtdev,
   libinput,
   gst_all_1,
@@ -58,62 +45,31 @@
 }:
 
 let
-  version = "9.4.2.111636_11636";
-  src = fetchurl {
-    url = "https://package.lanxin.cn/client/linux/lanxin-x64_Official_${version}.deb";
-    sha256 = "sha256-ktU9LsUcf2e7KIfzjNurMj7T3TqH4dUYzDbLw9DvkKc=";
-  };
+  version = "9.7.0.112432";
 
-  # For old libs
-  libtiff5-deb = stdenv.mkDerivation {
-    pname = "libtiff5-prebuilt";
-    version = "4.1.0";
-    src = fetchurl {
-      url = "http://archive.ubuntu.com/ubuntu/pool/main/t/tiff/libtiff5_4.1.0+git191117-2ubuntu0.20.04.14_amd64.deb";
-      sha256 = "sha256-sgQnJ61FRpugE601N7gIw7C6G26QhO3FrHmMXxKNcsA=";
-    };
-    nativeBuildInputs = [ dpkg ];
-    unpackPhase = "dpkg-deb -x $src .";
-    installPhase = ''
-      mkdir -p $out/lib
-      cp usr/lib/x86_64-linux-gnu/libtiff.so.5* $out/lib/
-    '';
-  };
-  libjasper-deb = stdenv.mkDerivation {
-    pname = "libjasper1-prebuilt";
-    version = "1.900.1";
-    src = fetchurl {
-      url = "http://archive.ubuntu.com/ubuntu/pool/main/j/jasper/libjasper1_1.900.1-debian1-2.4ubuntu1.3_amd64.deb";
-      sha256 = "sha256-/0xX/chkEXm/Jc/ILCN71T9aMOpB7TekOVlNPqNVLXg=";
-    };
-    nativeBuildInputs = [ dpkg ];
-    unpackPhase = "dpkg-deb -x $src .";
-    installPhase = ''
-      mkdir -p $out/lib
-      cp usr/lib/x86_64-linux-gnu/libjasper.so.1* $out/lib/
-    '';
+  src = fetchurl {
+    url = "https://cdn-lxs3.b.qianxin.com/lxpmcpublic/5eec975c-ccad-4a76-a43b-1dc50ddb0c9f.deb";
+    hash = "sha256-pgCD7boTA34XL18qba8+T+eV32aAzwNraHcp+pJ9bmU=";
   };
 in
 stdenv.mkDerivation {
   pname = "lanxin";
   inherit version src;
 
+  dontWrapQtApps = true;
+
   buildInputs = [
-    glibc
     zlib
     dbus
     cups
-    at-spi2-atk
     at-spi2-core
     libkrb5
-    libtiff
     libdrm
     alsa-lib
     libpulseaudio
     systemd
     libglvnd
     mesa
-    vulkan-loader
     gtk2
     gtk3
     gdk-pixbuf
@@ -126,32 +82,17 @@ stdenv.mkDerivation {
     libxshmfence
     libXScrnSaver
     libXcomposite
-    libXcursor
     libXdamage
     libXext
     libXfixes
-    libXi
     libXrandr
-    libXrender
-    libxkbfile
     libxcb
-    xcbutil
-    xcbutilwm
-    xcbutilimage
-    xcbutilkeysyms
-    xcbutilrenderutil
     qt5.qtmultimedia
     qt5.qtbase
-    qt5.qtdeclarative
     qt5.qtwayland
-    qt5.qtwebsockets
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-bad
-
-    libtiff5-deb
-    libjasper-deb
-
     mtdev
     libinput
 
@@ -164,35 +105,35 @@ stdenv.mkDerivation {
     dpkg
     autoPatchelfHook
     makeWrapper
-    qt5.wrapQtAppsHook
-    copyDesktopItems # process desktopItems list
+    copyDesktopItems
   ];
 
   unpackPhase = "dpkg-deb -x $src .";
 
   installPhase = ''
+    runHook preInstall
+
     mkdir -p $out/opt/lanxin
-    cp -r opt/apps/cn.lanxin/files/* $out/opt/lanxin/
+    cp -r opt/apps/cn.lanxin/files/. $out/opt/lanxin/
+
+    # These optional Qt image format plugins require the obsolete, unpatched
+    # libtiff.so.5 and libjasper.so.1 shipped by old Ubuntu releases.  The
+    # common PNG, JPEG, SVG and WebP plugins remain available.
+    rm -f \
+      $out/opt/lanxin/bin/plugins/imageformats/libqtiff.so \
+      $out/opt/lanxin/bin/plugins/imageformats/libqjp2.so
+
+    # EGLFS, LinuxFB, VNC and WebGL are embedded-device/server backends.  They
+    # also mix Lanxin's bundled Qt/libstdc++/libudev with Nixpkgs Qt, which
+    # causes symbol-version errors.  Keep the desktop XCB and Wayland backends.
+    rm -f \
+      $out/opt/lanxin/bin/{,Yealink/ylsdk/bin/}plugins/platforms/{libqeglfs.so,libqlinuxfb.so,libqminimalegl.so,libqvnc.so,libqwebgl.so}
 
     mkdir -p $out/share/icons/hicolor
-    cp -r opt/apps/cn.lanxin/entries/icons/hicolor/* $out/share/icons/hicolor/
-
-    # Rename icon from cn.lanxin.png to lanxin.png to match Icon=lanxin
-    for theme in $out/share/icons/hicolor/*; do
-      if [ -f "$theme/apps/cn.lanxin.png" ]; then
-        mv "$theme/apps/cn.lanxin.png" "$theme/apps/lanxin.png"
-      fi
-    done
+    cp -r opt/apps/cn.lanxin/entries/icons/hicolor/. $out/share/icons/hicolor/
 
     if [ -d "opt/apps/cn.lanxin/entries/icons/scalable" ]; then
-       mkdir -p $out/share/icons/hicolor/scalable/apps
-       cp opt/apps/cn.lanxin/entries/icons/scalable/apps/* $out/share/icons/hicolor/scalable/apps/ 2>/dev/null || true
-       if [ -f "$out/share/icons/hicolor/scalable/apps/cn.lanxin.svg" ]; then
-          mv "$out/share/icons/hicolor/scalable/apps/cn.lanxin.svg" "$out/share/icons/hicolor/scalable/apps/lanxin.svg"
-       fi
-       if [ -f "$out/share/icons/hicolor/scalable/apps/cn.lanxin1.svg" ]; then
-          mv "$out/share/icons/hicolor/scalable/apps/cn.lanxin1.svg" "$out/share/icons/hicolor/scalable/apps/lanxin1.svg"
-       fi
+      cp -r opt/apps/cn.lanxin/entries/icons/scalable $out/share/icons/hicolor/
     fi
 
     runHook postInstall
@@ -200,13 +141,17 @@ stdenv.mkDerivation {
 
   desktopItems = [
     (makeDesktopItem {
-      name = "lanxin";
+      name = "cn.lanxin";
       desktopName = "Lanxin";
       exec = "lanxin %U";
       terminal = false;
-      icon = "lanxin";
-      startupWMClass = "lanxin";
+      icon = "cn.lanxin";
+      startupWMClass = "cn.lanxin";
       comment = "Lanxin Instant Messenger";
+      mimeTypes = [
+        "x-scheme-handler/lanxinplus"
+        "x-scheme-handler/cn.lanxin"
+      ];
       categories = [
         "Network"
         "InstantMessaging"
@@ -220,9 +165,6 @@ stdenv.mkDerivation {
   ];
 
   postFixup = ''
-    echo "Fixing libbase.so interpreter..."
-    find $out -name "libbase.so" -exec patchelf --remove-interpreter {} \;
-
     wrapProgram $out/opt/lanxin/bin/lanxin \
       --prefix LD_LIBRARY_PATH : "${
         lib.makeLibraryPath [
@@ -231,8 +173,7 @@ stdenv.mkDerivation {
           mesa
         ]
       }" \
-      --set XDG_SESSION_TYPE x11 \
-      --set QT_QPA_PLATFORM xcb \
+      --set-default QT_QPA_PLATFORM xcb \
       --add-flags "--no-sandbox"
 
     mkdir -p $out/bin
