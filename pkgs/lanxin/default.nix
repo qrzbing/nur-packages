@@ -45,11 +45,11 @@
 }:
 
 let
-  version = "9.7.0.112432";
+  version = "9.9.0.112609";
 
   src = fetchurl {
-    url = "https://cdn-lxs3.b.qianxin.com/lxpmcpublic/5eec975c-ccad-4a76-a43b-1dc50ddb0c9f.deb";
-    hash = "sha256-pgCD7boTA34XL18qba8+T+eV32aAzwNraHcp+pJ9bmU=";
+    url = "https://cdn-lxs3.b.qianxin.com/lxpmcpublic/90aabdbb-94c5-4b8a-9368-30315ab86c05.deb";
+    hash = "sha256-dRr9IByMCFtbGzKrNB8+7AkJBBByUHPxrnGmriwuTAc=";
   };
 in
 stdenv.mkDerivation {
@@ -172,9 +172,7 @@ stdenv.mkDerivation {
           libglvnd
           mesa
         ]
-      }" \
-      --set-default QT_QPA_PLATFORM xcb \
-      --add-flags "--no-sandbox"
+      }"
 
     mkdir -p $out/bin
     ln -s $out/opt/lanxin/bin/lanxin $out/bin/lanxin
