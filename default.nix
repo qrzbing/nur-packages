@@ -17,6 +17,5 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
-  neo4j-mcp = pkgs.callPackage ./pkgs/neo4j-mcp { };
   # ...
 }
