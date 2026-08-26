@@ -17,5 +17,6 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
+  sam-toki-mouse-cursors = pkgs.callPackage ./pkgs/sam-toki-mouse-cursors { };
   # ...
 }
