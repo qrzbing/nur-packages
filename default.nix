@@ -10,19 +10,12 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-rec {
+{
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  gdb-static = pkgs.callPackage ./pkgs/gdb-static { };
-  gef-static = pkgs.callPackage ./pkgs/gef-static {
-    inherit gdb-static;
-  };
-  gef-static-git = pkgs.callPackage ./pkgs/gef-static-git {
-    inherit gdb-static;
-  };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   neo4j-mcp = pkgs.callPackage ./pkgs/neo4j-mcp { };
   # ...
