@@ -16,6 +16,7 @@
   nixosModules = import ./nixos-modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  audiveris = pkgs.callPackage ./pkgs/audiveris { };
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   musescore = pkgs.callPackage ./pkgs/musescore { };
   sam-toki-mouse-cursors = pkgs.callPackage ./pkgs/sam-toki-mouse-cursors { };
