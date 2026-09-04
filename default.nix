@@ -20,5 +20,6 @@
   lanxin = pkgs.callPackage ./pkgs/lanxin { };
   musescore = pkgs.callPackage ./pkgs/musescore { };
   sam-toki-mouse-cursors = pkgs.callPackage ./pkgs/sam-toki-mouse-cursors { };
+  tonghuashun = pkgs.callPackage ./pkgs/tonghuashun { };
   # ...
 }
