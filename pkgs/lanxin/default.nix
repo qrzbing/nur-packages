@@ -166,6 +166,7 @@ stdenv.mkDerivation {
 
   postFixup = ''
     wrapProgram $out/opt/lanxin/bin/lanxin \
+      --set GTK_IM_MODULE fcitx \
       --prefix LD_LIBRARY_PATH : "${
         lib.makeLibraryPath [
           systemd
