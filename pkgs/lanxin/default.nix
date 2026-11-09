@@ -45,11 +45,11 @@
 }:
 
 let
-  version = "9.9.0.112609";
+  version = "9.10.0.113166";
 
   src = fetchurl {
-    url = "https://cdn-lxs3.b.qianxin.com/lxpmcpublic/90aabdbb-94c5-4b8a-9368-30315ab86c05.deb";
-    hash = "sha256-dRr9IByMCFtbGzKrNB8+7AkJBBByUHPxrnGmriwuTAc=";
+    url = "https://cdn-lxs3.b.qianxin.com/lxpmcpublic/5fb7c35e-cbd1-4e26-8d65-80cdd39da5f4.deb";
+    hash = "sha256-aa56XYwp/leJUIq2JHLDFLoSAjQZ/yRdUrR+rq5fpHc=";
   };
 in
 stdenv.mkDerivation {
